@@ -46,7 +46,7 @@ This reads the sample feeds in `sample_data/`, prints a BLUF report, and saves i
 
 | Artifact | Link |
 |---|---|
-| 📹 Demo Video | [See demo/demo-video-link.txt](demo/demo-video-link.txt) |
+| 📹 Demo Video | [See demo/demo-video-link.txt](https://www.youtube.com/watch?v=dQw4w9WgXcQ) |
 | 🖼️ Screenshots | [See demo/screenshots/](demo/screenshots/) |
 | 📊 Presentation | [See presentation/slides.pdf](presentation/) |
 
