@@ -1,79 +1,81 @@
 # Setup Guide
 
-> **This file is read by the automated evaluation pipeline. Be precise and complete.**
+Follow these steps exactly — this is written assuming you've never seen
+this repo before.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
-
-- [ ] [e.g., Python 3.11+]
-- [ ] [e.g., Node.js 18+]
-- [ ] [e.g., Docker Desktop]
-- [ ] [e.g., An IBM Cloud account with watsonx.ai access]
+- Python 3.9 or newer
+- No external packages required — the pipeline only uses Python's standard
+  library
+- (Optional) An IBM Bob endpoint + API key, only needed for the live
+  conversational follow-up feature
 
 ## Environment Variables
 
-Copy `.env.example` to `.env` and fill in the values:
+Copy the example file and fill it in (only required if you want live Bob
+integration — the pipeline runs fine without it):
 
 ```bash
+cd src
 cp .env.example .env
 ```
 
-| Variable | Description | Required |
-|---|---|---|
-| `WATSONX_API_KEY` | Your IBM watsonx.ai API key | Yes |
-| `WATSONX_PROJECT_ID` | Your watsonx.ai project ID | Yes |
-| `DATABASE_URL` | PostgreSQL connection string | Yes |
-| `SLACK_WEBHOOK_URL` | Slack webhook for alerts | No |
+| Variable | Description |
+|---|---|
+| `BOB_ENDPOINT` | URL of your IBM Bob deployment's chat endpoint |
+| `BOB_API_KEY` | API key/token for that endpoint |
+| `FEED_DATA_DIR` | Optional — directory of feed files, defaults to `sample_data` |
 
-## Installation
+## Install
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/[your-org]/[your-repo].git
-cd [your-repo]
+Nothing to install — pure Python standard library.
 
-# 2. Install backend dependencies
-[your command — e.g.: pip install -r requirements.txt]
-
-# 3. Install frontend dependencies (if applicable)
-[your command — e.g.: cd frontend && npm install]
-
-# 4. Set up the database (if applicable)
-[your command — e.g.: python manage.py migrate]
-```
-
-## Running the Application
+## Run
 
 ```bash
-# Start the backend
-[your command — e.g.: uvicorn app.main:app --reload]
-
-# Start the frontend (in a separate terminal, if applicable)
-[your command — e.g.: cd frontend && npm run dev]
+cd src
+python3 main.py
 ```
 
-The application will be available at: `http://localhost:[PORT]`
+Expected output: a BLUF-format threat report printed to the console, and
+saved to `src/bluf_report.md`.
 
-## Running Tests
+To run against your own feed data instead of the bundled samples:
 
 ```bash
-[your test command — e.g.: pytest tests/ -v]
+python3 main.py --data-dir /path/to/your/feeds --out /path/to/report.md
 ```
 
-## Quick Demo (Optional)
+Feed files must be named `siem_alerts.json`, `satellite_feed.json`,
+`cyber_sensors.json`, or `intel_reports.json` and follow the schema shown
+in `sample_data/`.
 
-If you have a demo script or sample data to showcase the project quickly:
+## Verify It's Working
+
+Open `src/bluf_report.md` after running. You should see:
+
+- A count of genuine threat clusters vs. suppressed false positives
+- At least one `CRITICAL` or `HIGH` threat cluster (from the bundled
+  sample data, which includes a synthetic cross-source phishing → C2 →
+  exfiltration chain)
+- MITRE ATT&CK technique IDs listed under each threat
+
+## (Optional) Test the Bob Integration
 
 ```bash
-[e.g.: python demo/seed_demo_data.py]
-[e.g.: open http://localhost:8000/demo]
+python3 bob_interface.py
 ```
+
+Without `BOB_ENDPOINT` configured, this prints a "stub" response showing
+exactly what would have been sent to Bob — confirming the integration
+point works even without live credentials.
 
 ## Troubleshooting
 
-| Issue | Solution |
+| Error | Fix |
 |---|---|
-| [e.g., `ModuleNotFoundError`] | [e.g., Run `pip install -r requirements.txt` again] |
-| [e.g., Database connection refused] | [e.g., Ensure PostgreSQL is running: `docker compose up db`] |
-| [e.g., watsonx.ai 401 error] | [e.g., Check `WATSONX_API_KEY` in your `.env` file] |
+| `python3: command not found` | Try `python` instead of `python3`, or install Python from python.org |
+| `FileNotFoundError: sample_data` | Make sure you're inside the `src/` folder when you run the command |
+| No output / empty report | Check that your feed JSON files match the exact filenames listed above |
+| Bob integration errors out (not stub) | Check `.env` — `BOB_ENDPOINT` and `BOB_API_KEY` must both be set and valid |

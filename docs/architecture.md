@@ -1,49 +1,53 @@
 # Architecture
 
-## System Architecture
+## System Diagram
 
-[Describe the overall architecture of your system. Replace the Mermaid diagram below with your actual architecture.]
-
-```mermaid
+'''mermaid
 graph TD
-    A[User / Browser] -->|HTTP| B[Frontend - React]
-    B -->|REST API| C[Backend - FastAPI]
-    C -->|SDK| D[watsonx.ai]
-    C -->|Query| E[PostgreSQL]
-    C -->|Publish| F[Slack Webhook]
-    D -->|Inference Result| C
-```
+    A[SIEM Feed] --> E[ingest.py]
+    B[Satellite Feed] --> E
+    C[Cyber Sensor Feed] --> E
+    D[Intel Reports] --> E
+    E -->|Normalized Alerts| F[correlate.py]
+    F -->|Threat Clusters + Scores| G[mitre_map.py]
+    G -->|ATT&CK-tagged Clusters| H[bluf.py]
+    H -->|BLUF Report| I[bob_interface.py]
+    I -->|Report + Q&A| J[Commander]
+'''
 
-## Components
+## Component Table
 
 | Component | Technology | Responsibility |
 |---|---|---|
-| Frontend | [e.g., React 18] | [e.g., Dashboard UI, user interaction] |
-| Backend API | [e.g., FastAPI] | [e.g., Business logic, orchestration] |
-| AI / ML | [e.g., watsonx.ai] | [e.g., Anomaly scoring, classification] |
-| Database | [e.g., PostgreSQL] | [e.g., Storing pipeline events and scores] |
-| Notifications | [e.g., Slack API] | [e.g., Alerting on threshold breaches] |
+| `ingest.py` | Python (stdlib `json`) | Parses each source's native format into a common `Alert` schema |
+| `mitre_map.py` | Python (keyword lookup table) | Maps alert behavior tags to MITRE ATT&CK techniques and tactics |
+| `correlate.py` | Python | Groups alerts into threat clusters by shared indicators/time proximity; scores genuine vs. false positive |
+| `bluf.py` | Python | Renders scored clusters into BLUF-format markdown |
+| `bob_interface.py` | Python (`urllib`) | Sends the finished report to IBM Bob for natural-language commander Q&A |
+| `main.py` | Python (`argparse`) | CLI entry point that wires the pipeline stages together |
 
-## Data Flow
+## Data Flow, End to End
 
-[Describe how data moves through your system from input to output.]
+1. Raw feed files (JSON) land in `sample_data/` (or a live feed directory).
+2. `main.py` calls `ingest.load_all()`, which reads each file and returns a
+   list of normalized `Alert` objects.
+3. `correlate.correlate_alerts()` sorts alerts by time and unions them into
+   `ThreatCluster` objects based on shared indicators or time-windowed tag
+   overlap, then scores each cluster.
+4. `correlate.split_genuine_vs_false_positive()` separates clusters above
+   and below the score threshold.
+5. `bluf.generate_report()` renders both lists into a single markdown
+   report, with false positives kept in an audit-trail section.
+6. `main.py` writes the report to disk and prints it; `bob_interface.py`
+   can optionally forward it to IBM Bob for conversational follow-up.
 
-1. [e.g., Pipeline logs are ingested via a webhook from GitHub Actions]
-2. [e.g., Logs are preprocessed and chunked into 512-token segments]
-3. [e.g., Each chunk is sent to the watsonx.ai inference endpoint]
-4. [e.g., Anomaly scores are stored in PostgreSQL]
-5. [e.g., The React dashboard polls the API every 30 seconds to refresh]
+## Security & Scalability Notes
 
-## Security Considerations
-
-[Note any security decisions relevant to the architecture — even if basic.]
-
-- [e.g., API keys stored in environment variables, never committed to git]
-- [e.g., All API routes require a Bearer token]
-- [e.g., Database credentials rotated via IBM Secrets Manager]
-
-## Scalability Notes
-
-[Optional: how would this scale beyond the hackathon prototype?]
-
-[e.g., "The FastAPI backend is stateless and could be horizontally scaled behind a load balancer. The watsonx.ai calls are the bottleneck and would benefit from request batching."]
+- No real credentials are stored in the repo — `.env.example` documents
+  required variables, and the actual `.env` is git-ignored.
+- The correlation step is O(n × clusters) per alert, which is fine at
+  hackathon scale; a production version would index alerts by indicator
+  in a hash map rather than scanning existing clusters linearly.
+- The MITRE mapping table is a simple, auditable keyword lookup rather
+  than a full STIX/TAXII client — noted as a known limitation, with the
+  interface designed so it can be swapped in without changing callers.
