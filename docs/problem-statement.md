@@ -1,44 +1,21 @@
-# Problem Statement
+# Problem Statement: The Alert Fatigue Crisis in Defense Operations
 
-## The Problem
+### The Target Audience
+Our solution is designed for **Military Defense Analysts**, **Security Operations Center (SOC) Operators**, and **Military Commanders** who are responsible for securing mission-critical infrastructure and data.
 
-Defense analysts are overwhelmed by alert volume. On any given day, a single
-operations center receives thousands of alerts from SIEM systems, satellite
-imagery feeds, cyber sensors, and human/signals intelligence reports — each
-in its own format, using its own severity scale, and arriving on its own
-timeline. No human team can read all of it in real time.
+### The Core Problem
+Modern defense systems generate an overwhelming volume of security alerts. Analysts are bombarded with thousands of daily notifications from:
+1. SIEM systems
+2. Satellite telemetry feeds
+3. Disparate cyber sensors
+4. External intelligence reports
 
-## Who Is Affected
+Human teams cannot manually parse this volume of unstructured data. The resulting "alert fatigue" forces analysts into a reactive posture where chasing false positives wastes critical resources, and missing a genuine, coordinated threat could result in catastrophic operational failure.
 
-- **SOC analysts** triaging alerts under time pressure, who must decide in
-  minutes whether an alert is real or noise
-- **Commanders** who need a clear operational picture but instead receive
-  raw, unfiltered feeds from multiple disconnected systems
-- **Incident responders** who waste hours manually cross-referencing IPs,
-  domains, and timestamps across tools that don't talk to each other
+### Why Existing Solutions Fail
+Current workflows rely on manual correlation across separate dashboards. Existing tools provide raw data but lack the contextual intelligence to instantly map an alert to a known adversary behavior. Furthermore, when a threat is identified, analysts must manually draft time-consuming threat assessments, delaying the flow of information to decision-makers.
 
-## Why Existing Solutions Fall Short
+### The Need for BLUF
+Commanders do not have time to read highly technical, multi-page log analyses during an active cyber engagement. They require **BLUF (Bottom Line Up Front)** summaries—rapid, structured, and prioritized intelligence that dictates exactly what is happening and what actions must be taken.
 
-Most SIEM and sensor platforms are single-source: a SIEM correlates SIEM
-data, a satellite platform reports satellite anomalies, and so on. None of
-them naturally correlate a phishing login (SIEM) with a satellite-observed
-unusual asset movement or a C2 beacon (cyber sensor) with a related open-
-source intelligence report about the same threat actor. That correlation
-is currently done manually, by an analyst holding four browser tabs open,
-if it's done at all.
 
-## Cost of the Problem
-
-- Missing a genuine, multi-source-corroborated threat is catastrophic —
-  the kind of signal that gets lost is exactly the kind that indicates a
-  coordinated, real attack rather than background noise
-- Chasing every single-source alert individually wastes analyst time that
-  should go to the alerts that actually matter, contributing to alert
-  fatigue and slower response on real incidents
-
-## Why This Matters Now
-
-Alert volume across SIEM, sensor, satellite, and intelligence feeds is
-growing faster than analyst headcount. Without automated cross-source
-correlation and prioritization, the gap between "alerts generated" and
-"alerts a human can actually review" will keep widening.

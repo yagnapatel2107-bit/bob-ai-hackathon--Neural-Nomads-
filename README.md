@@ -1,61 +1,33 @@
-# 🚀 Multi-Source Threat Correlation & BLUF Reporting
 
-## 👥 Team
+# SmartOps Threat Intelligence Assistant (Powered by IBM Bob)
 
-| Field | Value |
-|---|---|
-| **Team Name** | Neural Nomads |
-| **Track** | AI |
-| **Team Lead** | Yagna Patel — 26aimlcharusat.edu.in |
-| **Members** | Dhyey, Het, Sarim |
+**Track:** AI  
+**Team:** Yagna Patel (Lead), Dhyey, Het, Sarim  
 
-## 🎯 Problem Statement
-
-Defense analysts receive thousands of alerts daily from SIEM systems, satellite feeds, cyber sensors, and intelligence reports, all in different formats. No human team can read them all, so genuine threats get buried in noise while false positives waste critical response time.
+## 🚨 Problem Statement
+Defense analysts and Security Operations Centers (SOCs) receive thousands of daily alerts from disparate sources, including SIEM systems, satellite feeds, and cyber sensors. Missing a genuine threat can lead to catastrophic breaches, but manually chasing false positives wastes critical response time and resources. Commanders currently lack rapid, structured visibility into high-priority threats.
 
 ## 💡 Solution
-
-Our pipeline ingests all four feed types into one common alert format, correlates alerts across sources by shared indicators and timing to separate real threats from noise, maps correlated activity to MITRE ATT&CK techniques, and outputs ranked BLUF summaries commanders can act on immediately.
+We built an IBM Bob Copilot that ingests and correlates multi-source threat feeds in real-time. By mapping attacker behaviors directly to the MITRE ATT&CK framework, the system separates genuine threats from false positives and auto-generates Bottom Line Up Front (BLUF) summaries for military commanders.
 
 ## ✨ Key Features
+* **Multi-Source Ingestion:** Unified correlation of SIEM, satellite, and cyber sensor alerts.
+* **Intelligent Triage:** Automated separation of critical threats from false positives using watsonx.ai.
+* **MITRE ATT&CK Mapping:** Direct alignment of adversary techniques to the industry-standard threat framework.
+* **BLUF Generation:** Instant, structured executive summaries for rapid commander decision-making.
 
-- **Multi-source ingestion:** Normalizes SIEM, satellite, cyber-sensor, and intel-report data into one schema
-- **Correlation engine:** Groups related alerts and scores them to filter out false positives
-- **MITRE ATT&CK mapping:** Automatically tags each threat cluster with relevant techniques and tactics
-- **BLUF report generation:** Produces commander-ready, prioritized threat summaries
-- **IBM Bob / watsonx.ai integration:** MCP server exposes the pipeline as tools; lets commanders ask natural-language follow-up questions grounded in the report
+## 🛠 Tech Stack
+* **AI & Logic:** IBM Bob CLI, watsonx.ai (Granite 3.0), MCP SDK
+* **Backend:** Python, FastAPI, PostgreSQL
+* **Frontend:** React, Tailwind CSS
 
-## 🛠️ Tech Stack
+## 🚀 How to Run
+Please see our complete setup instructions in `docs/setup-guide.md`.
 
-| Category | Technologies |
-|---|---|
-| **Languages** | Python |
-| **IBM Technologies** | IBM Bob, watsonx.ai (Granite), MCP |
-
-## ⚡ How to Run
-
-```bash
-git clone https://github.com/yagnapatel2107-bit/bob-ai-hackathon--Neural-Nomads-.git
-cd bob-ai-hackathon--Neural-Nomads-/src
-python3 main.py
-```
-
-This reads the sample feeds in `sample_data/`, prints a BLUF report, and saves it to `bluf_report.md`.
-
-## 🖥️ Demo
-
-| Artifact | Link |
-|---|---|
-| 📹 Demo Video | [See demo/demo-video-link.txt](https://www.youtube.com/watch?v=dQw4w9WgXcQ) |
-| 🖼️ Screenshots | [See demo/screenshots/](demo/screenshots/) |
-| 📊 Presentation | [See presentation/slides.pdf](presentation/) |
+## 🎥 Demo & Media
+* **Live Demo Video:** [Het will put the video link here]
+* **Screenshots:** Available in the `demo/screenshots/` directory.
 
 ## ⚠️ Known Limitations
+* The current version uses simulated SIEM logs; live satellite feed integration is mocked for the hackathon environment.
 
-- MITRE ATT&CK mapping uses a curated keyword table, not the full official dataset
-- Demo video link is a placeholder pending final recording
-- watsonx.ai integration requires live credentials to move beyond stub mode
-
-## 🏅 What We're Most Proud Of
-
-The correlation engine chains alerts from three different source types (SIEM, cyber sensor, intel report) into a single CRITICAL threat cluster automatically — exactly the kind of connection an overloaded analyst might miss.
