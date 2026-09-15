@@ -9,61 +9,85 @@
 # =============================================================================
 
 team:
-  name: ""                             # REQUIRED — e.g., "Orion Squad"
-  track: ""                            # REQUIRED — one of: AI | DevOps | Sustainability | Open
+  name: "Neural-Nomads"
+  track: "AI"
   lead:
-    name: ""                           # REQUIRED — e.g., "Alice Chen"
-    email: ""                          # REQUIRED — e.g., "alice.chen@ibm.com"
+    name: "Yagna Patel"
+    email: "26aiml062@charusat.edu.in"
   members:
-    - name: ""                         # REQUIRED — Team member 1
-      email: ""
-    - name: ""                         # Add more members by copying the two lines above
-      email: ""
-    - name: ""
-      email: ""
+    - name: "Yagna Patel"
+      email: "26aiml062@charusat.edu.in"
+    - name: "Dhyeykumar Trivedi"
+      email: "26aiml063@charusat.edu.in"
+    - name: "Het Ramanuj"
+      email: "26aiml064@charusat.edu.in"
+    - name: "Sarim Saiyad"
+      email: "26aiml067@charusat.edu.in"
 
 submission:
-  title: ""                            # REQUIRED — Project display name, e.g., "SmartOps Dashboard"
+  title: "AI-Powered Cyber Threat Intelligence and False-Positive Filtering"
 
-  problem_statement: >                 # REQUIRED — 1-3 sentences. What problem? Who has it?
-    Replace this text with a concise description of the real-world problem
-    your project addresses and who experiences it.
+  problem_statement: >
+    Security teams receive large amounts of threat intelligence from SIEM
+    systems, satellite reports, cyber reports, and other security feeds.
+    Manually filtering false positives, identifying relevant threats, mapping
+    them to MITRE ATT&CK, and preparing useful summaries can take significant
+    time and effort.
 
-  solution_summary: >                  # REQUIRED — 1-3 sentences. What did you build?
-    Replace this text with a clear description of your solution
-    and how it addresses the problem above.
+  solution_summary: >
+    We are building an AI-assisted cyber threat intelligence solution that
+    analyzes security reports and threat feeds, helps identify and filter
+    potential false positives, maps threats to the MITRE ATT&CK framework,
+    and generates concise BLUF summaries so analysts can understand and
+    prioritize threats more quickly.
 
-  key_features:                        # REQUIRED — List 3 to 5 specific features you implemented
-    - ""                               # e.g., "Real-time pipeline anomaly detection using watsonx.ai"
-    - ""
-    - ""
-    - ""                               # optional 4th
-    - ""                               # optional 5th
+  key_features:
+    - "AI-assisted false-positive filtering"
+    - "MITRE ATT&CK threat and technique mapping"
+    - "BLUF (Bottom Line Up Front) threat summaries"
+    - "Analysis of cyber threat feeds and security reports"
+    - "Threat prioritization for security analysts"
 
   tech_stack:
-    languages: []                      # REQUIRED — e.g., ["Python", "TypeScript"]
-    frameworks: []                     # e.g., ["FastAPI", "React"]
-    ibm_technologies: []               # e.g., ["watsonx.ai", "IBM Bob", "IBM Cloud Functions"]
-    databases: []                      # e.g., ["PostgreSQL", "Redis"]
-    other: []                          # e.g., ["Docker", "GitHub Actions", "Slack API"]
+    languages:
+      - "Python"
+    frameworks:
+      - ""
+    ibm_technologies:
+      - "IBM watsonx.ai"
+      - "IBM Bob"
+    databases:
+      - ""
+    other:
+      - "Claude"
+      - "GitHub"
+      - "GitHub Desktop"
+      - "Visual Studio Code"
+      - "MITRE ATT&CK"
 
-  what_we_are_most_proud_of: >         # Optional but recommended — guides judges to your best work
-    Replace with what aspect of the submission you consider strongest
-    and want judges to pay special attention to.
+  what_we_are_most_proud_of: >
+    We are most proud of creating an AI-assisted workflow that brings together
+    threat intelligence analysis, false-positive filtering, MITRE ATT&CK
+    mapping, and BLUF summaries. By using IBM watsonx.ai, IBM Bob, and Claude
+    during development, we aim to make complex cyber threat information easier
+    to analyze and prioritize.
 
-  known_limitations: >                 # Optional but recommended — be honest about gaps
-    Replace with any known limitations, incomplete features,
-    or shortcuts taken due to time constraints.
+  known_limitations: >
+    The project was developed within a hackathon time limit, so the current
+    system may have limitations in the number of threat sources and datasets
+    it can process. AI-generated classifications and MITRE ATT&CK mappings
+    may also require human verification, and additional testing with larger
+    real-world security datasets would be needed before production deployment.
 
 # =============================================================================
 # ARTIFACT LOCATIONS
-# These paths are relative to the repo root. Only change if you moved files.
 # =============================================================================
+
 artifacts:
   source_code: "src/"
   setup_guide: "docs/setup-guide.md"
   architecture_doc: "docs/architecture.md"
-  demo_video: "demo/demo-video-link.txt"   # URL to hosted video (YouTube, Loom, Box)
-  live_demo: "demo/live-demo-url.txt"      # URL to deployed demo (optional)
+  demo_video: "demo/demo-video-link.txt"
+  live_demo: "demo/live-demo-url.txt"
   screenshots: "demo/screenshots/"
   presentation: "presentation/"
