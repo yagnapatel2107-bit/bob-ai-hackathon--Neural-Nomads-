@@ -3,7 +3,7 @@ from typing import Dict, List, Any
 
 class ThreatIntelligenceEngine:
     """Backend engine for multi-source correlation, false positive filtering,
-    MITRE ATT&CK mapping, and BLUF generation."""
+    MITRE ATT&CK mapping, and BLUF generation.""" 
 
     def __init__(self):
         self.mitre_db = {
