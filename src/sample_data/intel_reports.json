@@ -1,0 +1,22 @@
+[
+  {
+    "report_id": "INTEL-4001",
+    "timestamp": "2026-09-09T18:00:00Z",
+    "summary": "Threat actor group known for credential phishing and C2 beaconing observed targeting similar sector",
+    "credibility": "probable",
+    "associated_ips": ["203.0.113.44"],
+    "associated_domains": ["update-cdn-secure[.]net"],
+    "threat_actor": "APT-Fictional-12",
+    "keywords": ["phishing", "c2_beacon"]
+  },
+  {
+    "report_id": "INTEL-4002",
+    "timestamp": "2026-09-05T00:00:00Z",
+    "summary": "General advisory on unpatched public-facing web servers in the region",
+    "credibility": "possible",
+    "associated_ips": [],
+    "associated_domains": [],
+    "threat_actor": "",
+    "keywords": ["exploit_public_app"]
+  }
+]

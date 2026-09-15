@@ -1,0 +1,20 @@
+[
+  {
+    "obs_id": "SAT-2001",
+    "timestamp": "2026-09-10T03:00:00Z",
+    "observation": "Unscheduled convoy movement detected near forward operating base perimeter",
+    "confidence_band": "probable",
+    "asset_id": "FOB-Bravo",
+    "lat_lon": "34.05,-118.25",
+    "activity_tags": ["unusual_movement", "convoy"]
+  },
+  {
+    "obs_id": "SAT-2002",
+    "timestamp": "2026-09-11T15:20:00Z",
+    "observation": "Cloud cover over region, no actionable imagery",
+    "confidence_band": "unconfirmed",
+    "asset_id": "",
+    "lat_lon": "",
+    "activity_tags": []
+  }
+]

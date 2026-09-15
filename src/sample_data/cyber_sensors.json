@@ -1,0 +1,32 @@
+[
+  {
+    "sensor_event_id": "SENS-3001",
+    "timestamp": "2026-09-10T03:10:00Z",
+    "event_desc": "Beaconing pattern to external domain every 60 seconds",
+    "risk_score": "confirmed",
+    "endpoint_ip": ["10.1.2.5"],
+    "process_hash": ["a1b2c3d4e5f6"],
+    "c2_domain": ["update-cdn-secure[.]net"],
+    "behavior_tags": ["c2_beacon", "obfuscation"]
+  },
+  {
+    "sensor_event_id": "SENS-3002",
+    "timestamp": "2026-09-10T04:05:00Z",
+    "event_desc": "Large outbound data transfer immediately following beacon activity",
+    "risk_score": "confirmed",
+    "endpoint_ip": ["10.1.2.5"],
+    "process_hash": [],
+    "c2_domain": ["update-cdn-secure[.]net"],
+    "behavior_tags": ["exfiltration"]
+  },
+  {
+    "sensor_event_id": "SENS-3003",
+    "timestamp": "2026-09-12T11:00:00Z",
+    "event_desc": "Single dropped packet, benign broadcast noise",
+    "risk_score": "unconfirmed",
+    "endpoint_ip": ["10.1.9.9"],
+    "process_hash": [],
+    "c2_domain": [],
+    "behavior_tags": []
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "alert_id": "SIEM-1001",
+    "timestamp": "2026-09-10T02:14:00Z",
+    "message": "Multiple failed logins followed by success from external IP",
+    "severity": "high",
+    "src_ip": ["203.0.113.44"],
+    "dst_ip": ["10.1.2.5"],
+    "file_hash": [],
+    "domain": [],
+    "tags": ["valid_accounts", "phishing"]
+  },
+  {
+    "alert_id": "SIEM-1002",
+    "timestamp": "2026-09-10T02:40:00Z",
+    "message": "PowerShell process launched with base64-encoded command",
+    "severity": "high",
+    "src_ip": ["10.1.2.5"],
+    "dst_ip": [],
+    "file_hash": ["a1b2c3d4e5f6"],
+    "domain": [],
+    "tags": ["powershell", "obfuscation"]
+  },
+  {
+    "alert_id": "SIEM-1003",
+    "timestamp": "2026-09-12T09:00:00Z",
+    "message": "Routine antivirus signature update completed",
+    "severity": "low",
+    "src_ip": ["10.1.9.9"],
+    "dst_ip": [],
+    "file_hash": [],
+    "domain": [],
+    "tags": []
+  }
+]

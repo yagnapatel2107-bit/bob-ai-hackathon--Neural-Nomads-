@@ -1,47 +1,38 @@
-# Source Code
+# src/ — Source Code Layout
 
-Place all your project's source code in this folder.
+Pure Python 3.9+, no external dependencies required to run the core pipeline.
 
-## Structure Guidelines
+| File | Purpose |
+|---|---|
+| `ingest.py` | Normalizes SIEM, satellite, cyber-sensor, and intel-report feeds into one common `Alert` schema |
+| `mitre_map.py` | Keyword-based mapping from alert tags to MITRE ATT&CK techniques |
+| `correlate.py` | Groups alerts into threat clusters by shared indicators/time proximity; scores genuine vs. false positive |
+| `bluf.py` | Renders scored clusters into BLUF (Bottom Line Up Front) markdown for commanders |
+| `bob_interface.py` | Hands the finished BLUF report to IBM Bob for natural-language commander Q&A |
+| `main.py` | CLI entry point — wires the pipeline together |
+| `sample_data/` | Synthetic multi-source feed data used for the demo |
 
-Organize your code logically. Here are common patterns — use whatever fits
-your project:
+## Run it
 
-### Web Application
-```
-src/
-  backend/        ← API server code
-  frontend/       ← UI code
-  shared/         ← Shared utilities/types
-```
-
-### Data / AI Project
-```
-src/
-  data/           ← Data ingestion / preprocessing
-  models/         ← ML model code
-  api/            ← Serving layer
-  notebooks/      ← Jupyter notebooks (exploration)
+```bash
+cd src
+python3 main.py
 ```
 
-### CLI / Script-based Tool
+This reads `sample_data/`, prints the BLUF report to the console, and saves it to `bluf_report.md`.
+
+To point at your own feeds:
+
+```bash
+python3 main.py --data-dir /path/to/feeds --out /path/to/output.md
 ```
-src/
-  cli/            ← CLI entry points
-  lib/            ← Core logic
-  utils/          ← Helpers
+
+Feed files must be named `siem_alerts.json`, `satellite_feed.json`, `cyber_sensors.json`,
+or `intel_reports.json` and follow the schema shown in `sample_data/`.
+
+To enable live Bob follow-up Q&A, copy `.env.example` to `.env`, fill in `BOB_ENDPOINT`
+and `BOB_API_KEY`, then run:
+
+```bash
+python3 bob_interface.py
 ```
-
-## Important Files to Include
-
-- `requirements.txt` or `package.json` — dependency manifest
-- `.env.example` — template for environment variables (NEVER commit `.env`)
-- Any database migration files
-- Configuration files
-
-## What NOT to Include in src/
-
-- `.env` files with real secrets
-- Large binary files (use Git LFS or link externally)
-- `node_modules/` or `venv/` (these are in `.gitignore`)
-- Build artifacts (`dist/`, `build/`, `__pycache__/`)
