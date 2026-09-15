@@ -1,12 +1,6 @@
 # =============================================================================
 # HACKATHON SUBMISSION METADATA
 # =============================================================================
-# Instructions:
-#   - Fill in ALL required fields (marked with # REQUIRED)
-#   - Optional fields can be left as empty strings ""
-#   - Do NOT rename this file — the evaluation pipeline reads it by name
-#   - Use double quotes around all string values
-# =============================================================================
 
 team:
   name: "Neural-Nomads"
@@ -14,6 +8,7 @@ team:
   lead:
     name: "Yagna Patel"
     email: "26aiml062@charusat.edu.in"
+
   members:
     - name: "Yagna Patel"
       email: "26aiml062@charusat.edu.in"
@@ -51,13 +46,11 @@ submission:
   tech_stack:
     languages:
       - "Python"
-    frameworks:
-      - ""
+    frameworks: []
     ibm_technologies:
       - "IBM watsonx.ai"
       - "IBM Bob"
-    databases:
-      - ""
+    databases: []
     other:
       - "Claude"
       - "GitHub"
