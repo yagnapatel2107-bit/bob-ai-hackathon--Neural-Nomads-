@@ -25,7 +25,7 @@ We built an IBM Bob Copilot that ingests and correlates multi-source threat feed
 Please see our complete setup instructions in `docs/setup-guide.md`.
 
 ## 🎥 Demo & Media
-* **Live Demo Video:** [Het will put the video link here]
+* **Live Demo Video:** [Not Deployed]
 * **Screenshots:** Available in the `demo/screenshots/` directory.
 
 ## ⚠️ Known Limitations
